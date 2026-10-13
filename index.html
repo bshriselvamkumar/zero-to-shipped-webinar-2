@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>0 to Shipped — Resume Parser</title>
+  <meta name="description" content="Upload your resume, get a skills score in seconds. Runs entirely in your browser." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <span class="brand-mark">0&nbsp;→&nbsp;🚀</span>
+      <span class="brand-name">0 to Shipped</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#how">How it works</a>
+      <a href="#skills">Skills we check</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Project 01 · Resume Parser</p>
+      <h1>Is your resume <em>shipped</em>-ready?</h1>
+      <p class="lede">
+        Drop in a PDF. You'll get a score out of 100, the skills we found, and the
+        skills that are missing — in about a second.
+      </p>
+
+      <div class="parser-card">
+        <div id="dropzone" class="dropzone" tabindex="0" role="button"
+             aria-describedby="dropzone-hint">
+          <svg class="dropzone-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5" />
+            <path d="M4 15v2.5A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5V15" />
+          </svg>
+          <p class="dropzone-title">Drop your resume here</p>
+          <p id="dropzone-hint" class="dropzone-hint">
+            or <span class="link">browse files</span> — PDF, TXT or MD
+          </p>
+          <input id="file" class="visually-hidden" type="file"
+                 accept=".pdf,.txt,.md,application/pdf,text/plain" />
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+
+        <p class="sample-row">
+          No resume handy?
+          <button id="sample" class="link link--button" type="button">See a sample result</button>
+        </p>
+      </div>
+
+      <ul class="trust">
+        <li>Runs 100% in your browser</li>
+        <li>Nothing is uploaded</li>
+        <li>No sign-up</li>
+      </ul>
+    </section>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <div class="score-card">
+        <div id="ring" class="score-ring">
+          <div class="score-ring__inner">
+            <span id="score-value" class="score-value">0</span>
+            <span class="score-out">/ 100</span>
+          </div>
+        </div>
+        <div class="score-copy">
+          <p class="score-label" id="score-label">—</p>
+          <p class="score-summary" id="score-summary"></p>
+          <p class="score-file" id="score-file"></p>
+          <button id="reset" class="btn btn--ghost" type="button">Scan another resume</button>
+        </div>
+      </div>
+
+      <div class="panels">
+        <section class="panel panel--found">
+          <header class="panel-head">
+            <h2>Skills detected</h2>
+            <span class="pill pill--found" id="found-count">0</span>
+          </header>
+          <div id="found-list" class="chips"></div>
+        </section>
+
+        <section class="panel panel--missing">
+          <header class="panel-head">
+            <h2>Skills missing</h2>
+            <span class="pill pill--missing" id="missing-count">0</span>
+          </header>
+          <div id="missing-list" class="chips"></div>
+        </section>
+      </div>
+
+      <p class="disclaimer">
+        Scored by keyword match against a fixed list — great for a first pass,
+        not a substitute for a human reading it.
+      </p>
+    </section>
+
+    <section id="how" class="how">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <h3>Pick a file</h3>
+          <p>Your browser reads the PDF locally. It never leaves your machine.</p>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <h3>We read the text</h3>
+          <p>pdf.js pulls the text layer out of the document, page by page.</p>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <h3>We match and score</h3>
+          <p>Each skill we look for is checked against your text, and the score is
+             how many you covered.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="skills" class="skills-section">
+      <h2>What we look for</h2>
+      <div id="skill-groups" class="skill-groups"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built as part of <strong>0 to Shipped</strong> · The Dev Labs</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
